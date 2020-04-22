@@ -63,3 +63,9 @@ def ctverecek(velikost_ctverecku,x,y):
         t.forward(velikost_ctverecku)
         t.right(90)
     t.end_fill()
+    
+    
+    
+m=int(input('Zadej velkost hraciho pole:'))  # alespoň 5 !!
+bludiste= matice(m)
+print(bludiste)
