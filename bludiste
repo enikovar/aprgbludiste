@@ -1,0 +1,65 @@
+import turtle
+import numpy as np
+import random
+import time
+
+def matice(m):
+
+    bludiste = np.random.randint(0, 3, (m, m))
+    print("INIT\n", bludiste)
+    bludiste[0, :] = 0
+    bludiste[:, 0] = 0
+    bludiste[-1, :] = 0
+    bludiste[:, -1] = 0
+    bludiste = np.where(bludiste == 2, 1, bludiste)
+    #bludiste = np.where(bludiste == 3, 1, bludiste)
+    print("INIT2\n", bludiste)
+    
+    
+    # souradnice pro start
+    A = list(range(1, m-1))
+    print(A)
+    a = random.choice(A)
+    print(a)
+    A.remove(a)
+    print("Start", A)
+    B = list(range(1, m-1))
+    print(B)
+    b = random.choice(B)
+    print(b)
+    B.remove(b)
+    print("Cil", B)
+    bludiste[a][b] = 2
+    
+    
+    # souradnice pro cil
+    c = random.choice(A)
+    print(c)
+    d = random.choice(B)
+    print(d)
+    bludiste[c][d] = 3
+    k = int(np.where(bludiste == 3)[0])
+    l = int(np.where(bludiste == 3)[1])
+    #bludiste[k+1][l]=1
+    #bludiste[k - 1][l] = 1
+    #bludiste[k][l + 1] = 1
+    #bludiste[k][l - 1] = 1
+    r = int(np.where(bludiste == 2)[0])
+    s = int(np.where(bludiste == 2)[1])
+    #bludiste[r + 1][s] = 1
+    #bludiste[r - 1][s] = 1
+    #bludiste[r][s + 1] = 1
+    #bludiste[r][s - 1] = 1
+
+    #print("PRIPRAVENE\n", bludiste)
+    #print()
+
+    return  bludiste
+
+def ctverecek(velikost_ctverecku,x,y):
+    t.goto(x, y)
+    t.begin_fill()
+    for i in range(4):
+        t.forward(velikost_ctverecku)
+        t.right(90)
+    t.end_fill()
