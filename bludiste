@@ -69,3 +69,18 @@ def ctverecek(velikost_ctverecku,x,y):
 m=int(input('Zadej velkost hraciho pole:'))  # alespoň 5 !!
 bludiste= matice(m)
 print(bludiste)
+
+def generator(bludiste,m):
+
+
+    velikost_ctverecku = 15
+    barvy = ["blue", "black", "green", "red","pink", "yellow"]
+    start_x = -100
+    start_y = -70
+
+    t.penup()
+    for i in range(0, len(bludiste), 1):
+        for j in range(0, len(bludiste[i]), 1):
+            t.color(barvy[bludiste[i][j]])
+            ctverecek(velikost_ctverecku, start_x + j * velikost_ctverecku, start_y + i * velikost_ctverecku)
+    t.pendown()
