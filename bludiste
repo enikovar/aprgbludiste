@@ -63,20 +63,14 @@ def ctverecek(velikost_ctverecku,x,y):
         t.forward(velikost_ctverecku)
         t.right(90)
     t.end_fill()
-    
-    
-    
-m=int(input('Zadej velkost hraciho pole:'))  # alespoň 5 !!
-bludiste= matice(m)
-print(bludiste)
-
-def generator(bludiste,m):
+ 
+def vykresleni(bludiste,m):
 
 
     velikost_ctverecku = 15
     barvy = ["blue", "black", "green", "red","pink", "yellow"]
-    start_x = -100
-    start_y = -70
+    start_x = -10*len(bludiste)
+    start_y = -10*len(bludiste)
 
     t.penup()
     for i in range(0, len(bludiste), 1):
@@ -84,3 +78,93 @@ def generator(bludiste,m):
             t.color(barvy[bludiste[i][j]])
             ctverecek(velikost_ctverecku, start_x + j * velikost_ctverecku, start_y + i * velikost_ctverecku)
     t.pendown()
+
+
+def cesta(bludiste):
+
+    r = int(np.where(bludiste == 2)[0])
+    s = int(np.where(bludiste == 2)[1])
+    start = (r, s)
+
+    k = int(np.where(bludiste == 3)[0])
+    l = int(np.where(bludiste == 3)[1])
+    cil = (k, l)
+
+    print("Souradnice startu", start)
+    print(bludiste)
+    print("Cil", cil)
+
+    fronta = [cil]
+    print("Fronta", fronta)
+    presle = {cil: None}
+
+    while len(fronta) != 0:
+        aktualni = fronta.pop(0)
+        sousedni = []
+        nejkratsi_cesta = []
+
+        # nahoru
+        if aktualni[0] > 0:
+            if bludiste[aktualni[0] - 1][aktualni[1]] in (1, 2):
+                sousedni.append((aktualni[0] - 1, aktualni[1]))
+
+        # dolu
+        if aktualni[0] < (len(bludiste) - 1):
+            if bludiste[aktualni[0] + 1][aktualni[1]] in (1, 2):
+                sousedni.append((aktualni[0] + 1, aktualni[1]))
+
+        # doprava
+        if aktualni[1] < (len(bludiste[0]) - 1):
+            if bludiste[aktualni[0]][aktualni[1] + 1] in (1, 2):
+                sousedni.append((aktualni[0], aktualni[1] + 1))
+
+        # doleva
+        if aktualni[1] > 0:
+            if bludiste[aktualni[0]][aktualni[1] - 1] in (1, 2):
+                sousedni.append((aktualni[0], aktualni[1] - 1))
+
+        for t in range(0, len(sousedni)):
+            soused = sousedni[t]
+            if soused not in presle:
+
+                fronta.append(soused)
+                presle[soused] = aktualni
+            else:
+                pass
+
+        true = (start == aktualni)
+        if true == True:
+
+            while aktualni:
+                nejkratsi_cesta.append(aktualni)
+                aktualni = presle[aktualni]
+
+            return nejkratsi_cesta
+    
+    
+m=int(input('Zadej velkost hraciho pole:'))  # alespoň 5 !!
+t = turtle.Turtle()
+screen=turtle.Screen()
+screen.setup(800,500)
+t.hideturtle()
+t.speed("fastest")
+bludiste= matice(m)
+print(bludiste)
+vykresleni(bludiste,m)
+cesta = cesta(bludiste)
+
+while cesta== None :
+    print("Cesta neexistuje")
+    break
+else:
+    print("Nejkratsi cesta", cesta)
+    for i in range(1,len(cesta)-1):
+        e=cesta[i]
+        print("a:", e)
+        f = int(e[0])
+        g = int(e[1])
+        print("f:", f)
+        print("g:", g)
+        bludiste[f][g]= 5
+        print("VYSLEDEK", bludiste)
+
