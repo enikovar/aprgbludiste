@@ -12,7 +12,6 @@ def matice(m):
     bludiste[-1, :] = 0
     bludiste[:, -1] = 0
     bludiste = np.where(bludiste == 2, 1, bludiste)
-    #bludiste = np.where(bludiste == 3, 1, bludiste)
     print("INIT2\n", bludiste)
     
     
@@ -40,32 +39,25 @@ def matice(m):
     bludiste[c][d] = 3
     k = int(np.where(bludiste == 3)[0])
     l = int(np.where(bludiste == 3)[1])
-    #bludiste[k+1][l]=1
-    #bludiste[k - 1][l] = 1
-    #bludiste[k][l + 1] = 1
-    #bludiste[k][l - 1] = 1
     r = int(np.where(bludiste == 2)[0])
     s = int(np.where(bludiste == 2)[1])
-    #bludiste[r + 1][s] = 1
-    #bludiste[r - 1][s] = 1
-    #bludiste[r][s + 1] = 1
-    #bludiste[r][s - 1] = 1
-
+    
     #print("PRIPRAVENE\n", bludiste)
     #print()
 
     return  bludiste
 
 def ctverecek(velikost_ctverecku,x,y):
+
     t.goto(x, y)
     t.begin_fill()
     for i in range(4):
         t.forward(velikost_ctverecku)
         t.right(90)
     t.end_fill()
+    
  
 def vykresleni(bludiste,m):
-
 
     velikost_ctverecku = 15
     barvy = ["blue", "black", "green", "red","pink", "yellow"]
@@ -146,8 +138,16 @@ m=int(input('Zadej velkost hraciho pole:'))  # alespoň 5 !!
 t = turtle.Turtle()
 screen=turtle.Screen()
 screen.setup(800,500)
-t.hideturtle()
+turtle.bgcolor("grey70")
+turtle.title("Bludiště")
+style = ('Courier', 10, 'italic')
+turtle.hideturtle()
+turtle.penup()
+turtle.goto(-15,210)
+turtle.write('Bludiště: Zelená je START, červená je CÍL a žlutá zobrazuje nejkratší cestu.', font=style, align='center')
+turtle.pendown()
 t.speed("fastest")
+t.hideturtle()
 bludiste= matice(m)
 print(bludiste)
 vykresleni(bludiste,m)
@@ -155,7 +155,14 @@ cesta = cesta(bludiste)
 
 while cesta== None :
     print("Cesta neexistuje")
+    turtle.penup()
+    turtle.goto(-15, 180)
+    turtle.write('CESTA NEEXISTUJE', font=style, align='center')
+    turtle.pendown()
+    turtle.getscreen().update()
+    time.sleep(3)
     break
+    
 else:
     print("Nejkratsi cesta", cesta)
     for i in range(1,len(cesta)-1):
@@ -167,4 +174,20 @@ else:
         print("g:", g)
         bludiste[f][g]= 5
         print("VYSLEDEK", bludiste)
+        velikost_ctverecku = 15
+        barvy = ["blue", "black", "green", "red", "pink", "yellow"]
+        t.penup()
+        start_x = -10 * len(bludiste)
+        start_y = -10 * len(bludiste)
+        t.color(barvy[bludiste[f][g]])
+        ctverecek(velikost_ctverecku, start_x + g * velikost_ctverecku, start_y + f * velikost_ctverecku)
+        t.pendown()
+    turtle.penup()
+    turtle.goto(-15, 180)
+    turtle.write('CETSA NALEZENA', font=style, align='center')
+    turtle.pendown()
+    turtle.getscreen().update()
+    time.sleep(2)
+    t.clear()
+    t.getscreen()
 
