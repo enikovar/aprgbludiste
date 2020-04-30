@@ -82,9 +82,9 @@ def cesta(bludiste):
     l = int(np.where(bludiste == 3)[1])
     cil = (k, l)
 
-    print("Souradnice startu", start)
+    print("Souřadnice startu", start)
     print(bludiste)
-    print("Cil", cil)
+    print("Cíl", cil)
 
     fronta = [cil]
     print("Fronta", fronta)
@@ -134,7 +134,7 @@ def cesta(bludiste):
             return nejkratsi_cesta
     
     
-m=int(input('Zadej velkost hraciho pole:'))  # alespoň 5 !!
+m=int(input('Zadej velikost hracího pole:'))  # alespoň 5 !!
 t = turtle.Turtle()
 screen=turtle.Screen()
 screen.setup(800,500)
@@ -164,7 +164,7 @@ while cesta== None :
     break
     
 else:
-    print("Nejkratsi cesta", cesta)
+    print("Nejkratš cesta", cesta)
     for i in range(1,len(cesta)-1):
         e=cesta[i]
         print("a:", e)
@@ -184,7 +184,7 @@ else:
         t.pendown()
     turtle.penup()
     turtle.goto(-15, 180)
-    turtle.write('CETSA NALEZENA', font=style, align='center')
+    turtle.write('CESTA NALEZENA', font=style, align='center')
     turtle.pendown()
     turtle.getscreen().update()
     t.getscreen()
