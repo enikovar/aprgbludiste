@@ -1,3 +1,9 @@
+#   Po spuštění skriptu budete vyzváni ke zvolení velikosti hracího pole. Velikost hracího pole můžete zvolit v rozmezí 
+od 5 do 30. Poté zmáčkněte enter. Po zmáčknutí tlačítka enter se vykreslí bludiště. V bludišti černá barva charakterizuje průchozí 
+políčka, modrá “ překážku“,  zelené políčko start a červené cíl. Jakmile je dokončeno bludiště postupně se vykreslí žlutou barvou i 
+nejkratší cesta. 
+
+
 import turtle
 import numpy as np
 import random
